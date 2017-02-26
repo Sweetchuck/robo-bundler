@@ -40,9 +40,6 @@
         ],
         "post-update-cmd": [
             "\\Cheppers\\Robo\\Bundler\\Composer\\Scripts::postUpdateCmd"
-        ],
-        "post-create-project-cmd": [
-            "\\Cheppers\\Robo\\Bundler\\Composer\\Scripts::postCreateProjectCmd"
         ]
     }
 }
