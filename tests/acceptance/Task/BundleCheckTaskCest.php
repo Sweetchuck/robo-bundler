@@ -10,10 +10,10 @@ class BundleCheckTaskCest
     public function runCheckFail(AcceptanceTester $I)
     {
         $I->runRoboTask(BundleRoboFile::class, 'check:fail');
-        $I->assertEquals(1, $I->getRoboTaskExitCode());
         $I->assertContains(
             "Bundler can't satisfy your Gemfile's dependencies.",
             $I->getRoboTaskStdOutput()
         );
+        $I->assertEquals(1, $I->getRoboTaskExitCode());
     }
 }
