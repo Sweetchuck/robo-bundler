@@ -1,0 +1,16 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    rdoc (5.1.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  rdoc (>= 4.1)
+
+RUBY VERSION
+   ruby 2.3.0p0
+
+BUNDLED WITH
+   1.13.6

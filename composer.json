@@ -1,0 +1,48 @@
+{
+    "name": "cheppers/robo-bundler",
+    "description": "Robo task wrapper for Bundler.",
+    "license": "GPL-2.0",
+    "config": {
+        "bin-dir": "bin",
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=7.1",
+        "cheppers/asset-jar": "^0.0.1",
+        "consolidation/robo": "^1.0"
+    },
+    "require-dev": {
+        "cheppers/git-hooks": "^0.0",
+        "cheppers/robo-git": "^0.0.3",
+        "cheppers/robo-phpcs": "^0.0.12",
+        "codeception/codeception": "^2.2",
+        "danielstjules/stringy": "^2.3",
+        "symfony/finder": "^3.2",
+        "webmozart/path-util": "^2.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Cheppers\\Robo\\Bundler\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Cheppers\\Robo\\Bundler\\Test\\Helper\\": "tests/_support/Helper/",
+            "Cheppers\\Robo\\Bundler\\Tests\\Acceptance\\": "tests/acceptance/",
+            "Cheppers\\Robo\\Bundler\\Tests\\Unit\\": "tests/unit/"
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "\\Cheppers\\Robo\\Bundler\\Composer\\Scripts::postInstallCmd"
+        ],
+        "post-update-cmd": [
+            "\\Cheppers\\Robo\\Bundler\\Composer\\Scripts::postUpdateCmd"
+        ],
+        "post-create-project-cmd": [
+            "\\Cheppers\\Robo\\Bundler\\Composer\\Scripts::postCreateProjectCmd"
+        ]
+    }
+}
