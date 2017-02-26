@@ -10,10 +10,10 @@ class BundleInstallTaskCest
     public function runInstallSuccess(AcceptanceTester $I)
     {
         $I->runRoboTask(BundleRoboFile::class, 'install:success');
-        $I->assertEquals(0, $I->getRoboTaskExitCode());
         $I->assertContains(
             'Bundle complete! 1 Gemfile dependency',
             $I->getRoboTaskStdOutput()
         );
+        $I->assertEquals(0, $I->getRoboTaskExitCode());
     }
 }
