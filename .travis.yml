@@ -21,16 +21,16 @@ matrix:
 
 before_install:
     - 'src-dev/scripts/travis/before_install.sh'
-
-install:
     - 'export COMPOSER_NO_INTERACTION=1'
     - 'export COMPOSER_DISABLE_XDEBUG_WARN=1'
-    - "export RUBY_VERSION=$(BUNDLE_GEMFILE='tests/_data/Gemfile.fail.rb' bundle platform --ruby | awk '{print $2}')"
-    - 'echo "The expected ruby version is ${RUBY_VERSION}"'
-    - 'rvm install "${RUBY_VERSION}"'
-    - 'rvm --default use "${RUBY_VERSION}"'
+    - "export CUSTOM_RUBY_VERSION=$(BUNDLE_GEMFILE='tests/_data/Gemfile.fail.rb' bundle platform --ruby | awk '{print $2}')"
+    - 'echo "The expected ruby version is ${CUSTOM_RUBY_VERSION}"'
+    - 'rvm install "${CUSTOM_RUBY_VERSION}"'
+    - 'rvm --default use "${CUSTOM_RUBY_VERSION}"'
     - 'ruby --version'
     - 'gem install bundler'
+
+install:
     - 'composer install'
 
 script:
