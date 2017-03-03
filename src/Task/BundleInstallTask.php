@@ -422,37 +422,6 @@ class BundleInstallTask extends BaseTask
     /**
      * {@inheritdoc}
      */
-    protected function initOptions()
-    {
-        parent::initOptions();
-
-        $this->options += [
-            'binstubs' => 'value-optional',
-            'clean' => 'flag',
-            'full-index' => 'flag',
-            'jobs' => 'value',
-            'local' => 'flag',
-            'deployment' => 'flag',
-            'force' => 'flag',
-            'frozen' => 'flag',
-            'system' => 'flag',
-            'no-cache' => 'flag',
-            'no-prune' => 'flag',
-            'path' => 'value',
-            'quiet' => 'flag',
-            'retry' => 'value',
-            'shebang' => 'value',
-            'standalone' => 'space-separated',
-            'trust-policy' => 'value',
-            'with|without' => 'true|false',
-        ];
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function setOptions(array $option)
     {
         parent::setOptions($option);
@@ -542,25 +511,79 @@ class BundleInstallTask extends BaseTask
      */
     protected function getCommandOptions(): array
     {
-        return parent::getCommandOptions() + [
-            'binstubs' => $this->getBinStubs(),
-            'clean' => $this->getClean(),
-            'full-index' => $this->getFullIndex(),
-            'jobs' => $this->getJobs(),
-            'local' => $this->getLocal(),
-            'deployment' => $this->getDeployment(),
-            'force' => $this->getForce(),
-            'frozen' => $this->getFrozen(),
-            'system' => $this->getSystem(),
-            'no-cache' => $this->getNoCache(),
-            'no-prune' => $this->getNoPrune(),
-            'path' => $this->getPath(),
-            'quiet' => $this->getQuiet(),
-            'retry' => $this->getRetry(),
-            'shebang' => $this->getShebang(),
-            'standalone' => $this->getStandalone(),
-            'trust-policy' => $this->getTrustPolicy(),
-            'with|without' => $this->getWithOrWithout(),
-        ];
+        return [
+            'binstubs' => [
+                'type' => 'value-optional',
+                'value' => $this->getBinStubs(),
+            ],
+            'clean' => [
+                'type' => 'flag',
+                'value' => $this->getClean(),
+            ],
+            'full-index' => [
+                'type' => 'flag',
+                'value' => $this->getFullIndex(),
+            ],
+            'jobs' => [
+                'type' => 'value',
+                'value' => $this->getJobs(),
+            ],
+            'local' => [
+                'type' => 'flag',
+                'value' => $this->getLocal(),
+            ],
+            'deployment' => [
+                'type' => 'flag',
+                'value' => $this->getDeployment(),
+            ],
+            'force' => [
+                'type' => 'flag',
+                'value' => $this->getForce(),
+            ],
+            'frozen' => [
+                'type' => 'flag',
+                'value' => $this->getFrozen(),
+            ],
+            'system' => [
+                'type' => 'flag',
+                'value' => $this->getSystem(),
+            ],
+            'no-cache' => [
+                'type' => 'flag',
+                'value' => $this->getNoCache(),
+            ],
+            'no-prune' => [
+                'type' => 'flag',
+                'value' => $this->getNoPrune(),
+            ],
+            'path' => [
+                'type' => 'value',
+                'value' => $this->getPath(),
+            ],
+            'quiet' => [
+                'type' => 'flag',
+                'value' => $this->getQuiet(),
+            ],
+            'retry' => [
+                'type' => 'value',
+                'value' => $this->getRetry(),
+            ],
+            'shebang' => [
+                'type' => 'value',
+                'value' => $this->getShebang(),
+            ],
+            'standalone' => [
+                'type' => 'space-separated',
+                'value' => $this->getStandalone(),
+            ],
+            'trust-policy' => [
+                'type' => 'value',
+                'value' => $this->getTrustPolicy(),
+            ],
+            'with|without' => [
+                'type' => 'true|false',
+                'value' => $this->getWithOrWithout(),
+            ],
+        ] + parent::getCommandOptions();
     }
 }

@@ -19,20 +19,6 @@ class BundleCheckTask extends BaseTask
     protected $action = 'check';
 
     /**
-     * {@inheritdoc}
-     */
-    protected function initOptions()
-    {
-        parent::initOptions();
-
-        $this->options += [
-            'path' => 'value',
-        ];
-
-        return $this;
-    }
-
-    /**
      * @return $this
      */
     public function setOptions(array $options)
@@ -54,8 +40,11 @@ class BundleCheckTask extends BaseTask
      */
     protected function getCommandOptions(): array
     {
-        return parent::getCommandOptions() + [
-            'path' => $this->getPath(),
-        ];
+        return [
+            'path' => [
+                'type' => 'value',
+                'value' => $this->getPath(),
+            ],
+        ] + parent::getCommandOptions();
     }
 }

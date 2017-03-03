@@ -198,21 +198,12 @@ abstract class BaseTask extends RoboBaseTask implements AssetJarAwareInterface, 
 
     //endregion
 
-    protected $options = [
-        'BUNDLE_GEMFILE' => 'environment',
-        'gemfile' => 'value',
-        'verbose' => 'tri-state',
-        'no-color' => 'tri-state',
-    ];
-
     /**
      * {@inheritdoc}
      */
     public function __construct(array $options = [])
     {
-        $this
-            ->initOptions()
-            ->setOptions($options);
+        $this->setOptions($options);
     }
 
     /**
@@ -253,11 +244,6 @@ abstract class BaseTask extends RoboBaseTask implements AssetJarAwareInterface, 
         return $this;
     }
 
-    protected function initOptions()
-    {
-        return $this;
-    }
-
     public function getTaskName(): string
     {
         return $this->taskName ?: TaskInfo::formatTaskName($this);
@@ -268,8 +254,6 @@ abstract class BaseTask extends RoboBaseTask implements AssetJarAwareInterface, 
      */
     public function getCommand()
     {
-        $options = $this->getCommandOptions();
-
         $envPattern = '';
         $envArgs = [];
 
@@ -283,42 +267,42 @@ abstract class BaseTask extends RoboBaseTask implements AssetJarAwareInterface, 
 
         $cmdPattern .= escapeshellcmd($this->action);
 
-        foreach ($options as $optionName => $optionValue) {
-            switch ($this->options[$optionName]) {
+        foreach ($this->getCommandOptions() as $optionName => $option) {
+            switch ($option['type']) {
                 case 'environment':
-                    if ($optionValue !== null) {
+                    if ($option['value'] !== null) {
                         $envPattern .= " {$optionName}=%s";
-                        $envArgs[] = escapeshellarg($optionValue);
+                        $envArgs[] = escapeshellarg($option['value']);
                     }
                     break;
 
                 case 'value':
-                    if ($optionValue) {
+                    if ($option['value']) {
                         $cmdPattern .= " --$optionName=%s";
-                        $cmdArgs[] = escapeshellarg($optionValue);
+                        $cmdArgs[] = escapeshellarg($option['value']);
                     }
                     break;
 
                 case 'value-optional':
-                    if ($optionValue !== null) {
+                    if ($option['value'] !== null) {
                         $cmdPattern .= " --$optionName";
-                        $optionValue = (string) $optionValue;
-                        if ($optionValue !== '') {
+                        $option['value'] = (string) $option['value'];
+                        if ($option['value'] !== '') {
                             $cmdPattern .= "=%s";
-                            $cmdArgs[] = escapeshellarg($optionValue);
+                            $cmdArgs[] = escapeshellarg($option['value']);
                         }
                     }
                     break;
 
                 case 'flag':
-                    if ($optionValue) {
+                    if ($option['value']) {
                         $cmdPattern .= " --$optionName";
                     }
                     break;
 
                 case 'tri-state':
-                    if ($optionValue !== null) {
-                        $cmdPattern .= $optionValue ? " --$optionName" : " --no-$optionName";
+                    if ($option['value'] !== null) {
+                        $cmdPattern .= $option['value'] ? " --$optionName" : " --no-$optionName";
                     }
                     break;
 
@@ -329,7 +313,7 @@ abstract class BaseTask extends RoboBaseTask implements AssetJarAwareInterface, 
                     );
 
                     foreach ($nameFilter as $name => $filter) {
-                        $items = array_keys($optionValue, $filter, true);
+                        $items = array_keys($option['value'], $filter, true);
                         if ($items) {
                             $cmdPattern .= " --$name=%s";
                             $cmdArgs[] = escapeshellarg(implode(' ', $items));
@@ -338,7 +322,7 @@ abstract class BaseTask extends RoboBaseTask implements AssetJarAwareInterface, 
                     break;
 
                 case 'space-separated':
-                    $items = Utils::filterEnabled($optionValue);
+                    $items = Utils::filterEnabled($option['value']);
                     if ($items) {
                         $cmdPattern .= " --$optionName=%s";
                         $cmdArgs[] = escapeshellarg(implode(' ', $items));
@@ -385,7 +369,7 @@ abstract class BaseTask extends RoboBaseTask implements AssetJarAwareInterface, 
      */
     protected function runAction()
     {
-        /** @var Process $process */
+        /** @var \Symfony\Component\Process\Process $process */
         $process = new $this->processClass($this->command);
 
         $this->actionExitCode = $process->run(function ($type, $data) {
@@ -449,10 +433,22 @@ abstract class BaseTask extends RoboBaseTask implements AssetJarAwareInterface, 
     protected function getCommandOptions(): array
     {
         return [
-            'BUNDLE_GEMFILE' => $this->getBundleGemFile(),
-            'gemfile' => $this->getGemFile(),
-            'verbose' => $this->getVerbose(),
-            'no-color' => $this->getNoColor(),
+            'BUNDLE_GEMFILE' => [
+                'type' => 'environment',
+                'value' => $this->getBundleGemFile(),
+            ],
+            'gemfile' => [
+                'type' => 'value',
+                'value' => $this->getGemFile(),
+            ],
+            'verbose' => [
+                'type' => 'tri-state',
+                'value' => $this->getVerbose(),
+            ],
+            'no-color' => [
+                'type' => 'tri-state',
+                'value' => $this->getNoColor(),
+            ],
         ];
     }
 
