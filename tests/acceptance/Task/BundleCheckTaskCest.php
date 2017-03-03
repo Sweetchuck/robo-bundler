@@ -9,11 +9,12 @@ class BundleCheckTaskCest
 {
     public function runCheckFail(AcceptanceTester $I)
     {
-        $I->runRoboTask(BundleRoboFile::class, 'check:fail');
+        $id = 'check:fail';
+        $I->runRoboTask($id, BundleRoboFile::class, 'check:fail');
         $I->assertContains(
             "Bundler can't satisfy your Gemfile's dependencies.",
-            $I->getRoboTaskStdOutput()
+            $I->getRoboTaskStdOutput($id)
         );
-        $I->assertEquals(1, $I->getRoboTaskExitCode());
+        $I->assertEquals(1, $I->getRoboTaskExitCode($id));
     }
 }
