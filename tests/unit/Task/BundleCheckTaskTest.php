@@ -74,6 +74,14 @@ class BundleCheckTaskTest extends Unit
                     'noColor' => false,
                 ],
             ],
+            'common ones' => [
+                "cd 'my-dir' && BUNDLE_GEMFILE='Gemfile.my.rb' bundle check --verbose",
+                [
+                    'workingDirectory' => 'my-dir',
+                    'bundleGemFile' => 'Gemfile.my.rb',
+                    'verbose' => true,
+                ],
+            ],
         ];
     }
 
