@@ -15,6 +15,14 @@ trait BundlerTaskLoader
     }
 
     /**
+     * @return \Cheppers\Robo\Bundler\Task\BundleExecTask|\Robo\Collection\CollectionBuilder
+     */
+    protected function taskBundleExec(array $options = []): CollectionBuilder
+    {
+        return $this->task(Task\BundleExecTask::class, $options);
+    }
+
+    /**
      * @return \Cheppers\Robo\Bundler\Task\BundleInstallTask|\Robo\Collection\CollectionBuilder
      */
     protected function taskBundleInstall(array $options = []): CollectionBuilder

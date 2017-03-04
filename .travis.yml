@@ -29,6 +29,7 @@ before_install:
     - 'rvm --default use "${CUSTOM_RUBY_VERSION}"'
     - 'ruby --version'
     - 'gem install bundler'
+    - 'BUNDLE_GEMFILE=tests/_data/Gemfile.success.rb bundle install'
 
 install:
     - 'composer install'

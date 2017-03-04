@@ -214,6 +214,14 @@ abstract class BaseTask extends RoboBaseTask implements AssetJarAwareInterface, 
         foreach ($option as $name => $value) {
             // @codingStandardsIgnoreStart
             switch ($name) {
+                case 'assetJar':
+                    $this->setAssetJar($value);
+                    break;
+
+                case 'assetJarMapping':
+                    $this->setAssetJarMapping($value);
+                    break;
+
                 case 'workingDirectory':
                     $this->setWorkingDirectory($value);
                     break;
@@ -254,55 +262,56 @@ abstract class BaseTask extends RoboBaseTask implements AssetJarAwareInterface, 
      */
     public function getCommand()
     {
-        $envPattern = '';
+        $envPattern = [];
         $envArgs = [];
 
-        $cmdPattern = '';
+        $cmdPattern = [];
         $cmdArgs = [];
 
-        if ($this->getBundleExecutable()) {
-            $cmdPattern .= '%s ';
-            $cmdArgs[] = escapeshellcmd($this->getBundleExecutable());
-        }
+        $cmdAsIs = [];
 
-        $cmdPattern .= escapeshellcmd($this->action);
+        $cmdPattern[] = '%s';
+        $cmdArgs[] = escapeshellcmd($this->getBundleExecutable());
+
+        $cmdPattern[] = escapeshellcmd($this->action);
 
         foreach ($this->getCommandOptions() as $optionName => $option) {
             switch ($option['type']) {
                 case 'environment':
                     if ($option['value'] !== null) {
-                        $envPattern .= " {$optionName}=%s";
+                        $envPattern[] = "{$optionName}=%s";
                         $envArgs[] = escapeshellarg($option['value']);
                     }
                     break;
 
                 case 'value':
                     if ($option['value']) {
-                        $cmdPattern .= " --$optionName=%s";
+                        $cmdPattern[] = "--$optionName=%s";
                         $cmdArgs[] = escapeshellarg($option['value']);
                     }
                     break;
 
                 case 'value-optional':
                     if ($option['value'] !== null) {
-                        $cmdPattern .= " --$optionName";
-                        $option['value'] = (string) $option['value'];
-                        if ($option['value'] !== '') {
-                            $cmdPattern .= "=%s";
-                            $cmdArgs[] = escapeshellarg($option['value']);
+                        $value = (string) $option['value'];
+                        if ($value === '') {
+                            $cmdPattern[] = "--{$optionName}";
+                        } else {
+                            $cmdPattern[] = "--{$optionName}=%s";
+                            $cmdArgs[] = escapeshellarg($value);
                         }
                     }
                     break;
 
                 case 'flag':
                     if ($option['value']) {
-                        $cmdPattern .= " --$optionName";
+                        $cmdPattern[] = "--$optionName";
                     }
                     break;
 
                 case 'tri-state':
                     if ($option['value'] !== null) {
-                        $cmdPattern .= $option['value'] ? " --$optionName" : " --no-$optionName";
+                        $cmdPattern[] = $option['value'] ? "--$optionName" : "--no-$optionName";
                     }
                     break;
 
@@ -315,7 +324,7 @@ abstract class BaseTask extends RoboBaseTask implements AssetJarAwareInterface, 
                     foreach ($nameFilter as $name => $filter) {
                         $items = array_keys($option['value'], $filter, true);
                         if ($items) {
-                            $cmdPattern .= " --$name=%s";
+                            $cmdPattern[] = "--$name=%s";
                             $cmdArgs[] = escapeshellarg(implode(' ', $items));
                         }
                     }
@@ -324,22 +333,33 @@ abstract class BaseTask extends RoboBaseTask implements AssetJarAwareInterface, 
                 case 'space-separated':
                     $items = Utils::filterEnabled($option['value']);
                     if ($items) {
-                        $cmdPattern .= " --$optionName=%s";
+                        $cmdPattern[] = "--$optionName=%s";
                         $cmdArgs[] = escapeshellarg(implode(' ', $items));
+                    }
+                    break;
+
+                case 'as-is':
+                    if ($option['value'] instanceof CommandInterface) {
+                        $cmd = $option['value']->getCommand();
+                    } else {
+                        $cmd = (string) $option['value'];
+                    }
+
+                    if ($cmd) {
+                        $cmdAsIs[] = $cmd;
                     }
                     break;
             }
         }
 
-        $env = vsprintf($envPattern, $envArgs);
-        $command = '';
-        if ($this->getWorkingDirectory()) {
-            $command = sprintf('cd %s && ', escapeshellarg($this->getWorkingDirectory()));
-        }
+        $wd = $this->getWorkingDirectory();
 
-        $command .= $env ? ltrim("$env ") : '';
+        $chDir = $wd ? sprintf('cd %s &&', escapeshellarg($wd)) : '';
+        $env = vsprintf(implode(' ', $envPattern), $envArgs);
+        $cmd = vsprintf(implode(' ', $cmdPattern), $cmdArgs);
+        $asIs = implode(' ', $cmdAsIs);
 
-        return $command . vsprintf($cmdPattern, $cmdArgs);
+        return implode(' ', array_filter([$chDir, $env, $cmd, $asIs]));
     }
 
     public function run()
