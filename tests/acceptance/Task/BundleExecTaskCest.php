@@ -15,4 +15,13 @@ class BundleExecTaskCest
         $I->assertContains('bundle exec rdoc --help', $I->getRoboTaskStdError($id));
         $I->assertEquals(0, $I->getRoboTaskExitCode($id));
     }
+
+    public function runExecCommandSuccess(AcceptanceTester $I)
+    {
+        $id = 'exec:command-success';
+        $I->runRoboTask($id, BundleRoboFile::class, 'exec:command-success');
+        $I->assertContains('Usage: rdoc [options] [names...]', $I->getRoboTaskStdOutput($id));
+        $I->assertContains('bundle exec rdoc --help', $I->getRoboTaskStdError($id));
+        $I->assertEquals(0, $I->getRoboTaskExitCode($id));
+    }
 }
