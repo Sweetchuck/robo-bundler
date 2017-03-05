@@ -10,7 +10,7 @@
     "prefer-stable": true,
     "require": {
         "php": ">=7.1",
-        "cheppers/asset-jar": "^0.0.1",
+        "cheppers/asset-jar": "^0.0",
         "consolidation/robo": "^1.0"
     },
     "require-dev": {
