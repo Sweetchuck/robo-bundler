@@ -29,4 +29,12 @@ trait BundlerTaskLoader
     {
         return $this->task(Task\BundleInstallTask::class, $options);
     }
+
+    /**
+     * @return \Cheppers\Robo\Bundler\Task\BundleShowPathsTask|\Robo\Collection\CollectionBuilder
+     */
+    protected function taskBundleShowPaths(array $options = []): CollectionBuilder
+    {
+        return $this->task(Task\BundleShowPathsTask::class, $options);
+    }
 }

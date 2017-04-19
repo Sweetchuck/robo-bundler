@@ -44,4 +44,12 @@ class BundleRoboFile extends Tasks
             ->setOutput($this->output())
             ->setGemFile(codecept_data_dir('Gemfile.success.rb'));
     }
+
+    public function showPaths(): TaskInterface
+    {
+        return $this
+            ->taskBundleShowPaths()
+            ->setOutput($this->output())
+            ->setBundleGemFile(codecept_data_dir('Gemfile.success.rb'));
+    }
 }
