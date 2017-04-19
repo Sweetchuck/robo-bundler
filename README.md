@@ -6,4 +6,6 @@
 ## Currently supported commands
 
 * `bundle check`
+* `bundle exec`
 * `bundle install`
+* `bundle show --paths`
