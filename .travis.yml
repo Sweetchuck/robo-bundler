@@ -32,7 +32,7 @@ before_install:
     - 'BUNDLE_GEMFILE=tests/_data/Gemfile.success.rb bundle install'
 
 install:
-    - 'composer install'
+    - 'composer install --no-progress'
 
 script:
     - './bin/robo --ansi lint'
