@@ -34,7 +34,7 @@ class BundleShowPathsTask extends BaseTask
     {
         if ($this->actionExitCode === 0) {
             $this->assets['paths'] = preg_split(
-                "/\n+/",
+                '/\n+/',
                 $this->actionStdOutput,
                 -1,
                 PREG_SPLIT_NO_EMPTY
