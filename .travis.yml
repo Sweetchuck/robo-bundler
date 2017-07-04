@@ -12,12 +12,15 @@ matrix:
             sudo: false
             language: 'php'
             php: '7.1'
-        -
-            os: 'osx'
-            language: 'generic'
-            env:
-                - >-
-                    BREW_PHP=php71
+# Drop OSX support because of the mysterious
+# TTY mode requires /dev/tty to be read/writable.
+# error.
+#        -
+#            os: 'osx'
+#            language: 'generic'
+#            env:
+#                - >-
+#                    BREW_PHP=php71
 
 before_install:
     - 'src-dev/scripts/travis/before_install.sh'
@@ -35,8 +38,8 @@ install:
     - 'composer install --no-progress'
 
 script:
-    - './bin/robo --ansi lint'
-    - './bin/robo --ansi test'
+    - 'bin/robo lint'
+    - 'bin/robo test'
 
 after_success:
     - 'bash <(curl -s https://codecov.io/bash)'
