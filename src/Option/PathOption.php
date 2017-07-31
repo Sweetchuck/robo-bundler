@@ -1,6 +1,6 @@
 <?php
 
-namespace Cheppers\Robo\Bundler\Option;
+namespace Sweetchuck\Robo\Bundler\Option;
 
 trait PathOption
 {

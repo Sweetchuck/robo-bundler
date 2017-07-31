@@ -1,10 +1,10 @@
 <?php
 
-namespace Cheppers\Robo\Bundler\Task;
+namespace Sweetchuck\Robo\Bundler\Task;
 
-use Cheppers\AssetJar\AssetJarAware;
-use Cheppers\AssetJar\AssetJarAwareInterface;
-use Cheppers\Robo\Bundler\Utils;
+use Sweetchuck\AssetJar\AssetJarAware;
+use Sweetchuck\AssetJar\AssetJarAwareInterface;
+use Sweetchuck\Robo\Bundler\Utils;
 use Robo\Common\OutputAwareTrait;
 use Robo\Contract\CommandInterface;
 use Robo\Contract\OutputAwareInterface;

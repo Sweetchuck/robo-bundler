@@ -1,6 +1,6 @@
 <?php
 
-namespace Cheppers\Robo\Bundler;
+namespace Sweetchuck\Robo\Bundler;
 
 class Utils
 {

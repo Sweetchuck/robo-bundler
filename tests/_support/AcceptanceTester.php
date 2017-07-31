@@ -1,6 +1,6 @@
 <?php
 
-namespace Cheppers\Robo\Bundler\Test;
+namespace Sweetchuck\Robo\Bundler\Test;
 
 /**
  * Inherited Methods
