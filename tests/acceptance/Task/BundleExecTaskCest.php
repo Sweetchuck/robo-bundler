@@ -1,9 +1,9 @@
 <?php
 
-namespace Cheppers\Robo\Bundler\Tests\Acceptance\Task;
+namespace Sweetchuck\Robo\Bundler\Tests\Acceptance\Task;
 
-use Cheppers\Robo\Bundler\Test\AcceptanceTester;
-use Cheppers\Robo\Bundler\Test\Helper\RoboFiles\BundleRoboFile;
+use Sweetchuck\Robo\Bundler\Test\AcceptanceTester;
+use Sweetchuck\Robo\Bundler\Test\Helper\RoboFiles\BundleRoboFile;
 
 class BundleExecTaskCest
 {

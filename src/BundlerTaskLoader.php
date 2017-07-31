@@ -1,13 +1,13 @@
 <?php
 
-namespace Cheppers\Robo\Bundler;
+namespace Sweetchuck\Robo\Bundler;
 
 use Robo\Collection\CollectionBuilder;
 
 trait BundlerTaskLoader
 {
     /**
-     * @return \Cheppers\Robo\Bundler\Task\BundleCheckTask|\Robo\Collection\CollectionBuilder
+     * @return \Sweetchuck\Robo\Bundler\Task\BundleCheckTask|\Robo\Collection\CollectionBuilder
      */
     protected function taskBundleCheck(array $options = []): CollectionBuilder
     {
@@ -15,7 +15,7 @@ trait BundlerTaskLoader
     }
 
     /**
-     * @return \Cheppers\Robo\Bundler\Task\BundleExecTask|\Robo\Collection\CollectionBuilder
+     * @return \Sweetchuck\Robo\Bundler\Task\BundleExecTask|\Robo\Collection\CollectionBuilder
      */
     protected function taskBundleExec(array $options = []): CollectionBuilder
     {
@@ -23,7 +23,7 @@ trait BundlerTaskLoader
     }
 
     /**
-     * @return \Cheppers\Robo\Bundler\Task\BundleInstallTask|\Robo\Collection\CollectionBuilder
+     * @return \Sweetchuck\Robo\Bundler\Task\BundleInstallTask|\Robo\Collection\CollectionBuilder
      */
     protected function taskBundleInstall(array $options = []): CollectionBuilder
     {
@@ -31,7 +31,7 @@ trait BundlerTaskLoader
     }
 
     /**
-     * @return \Cheppers\Robo\Bundler\Task\BundleShowPathsTask|\Robo\Collection\CollectionBuilder
+     * @return \Sweetchuck\Robo\Bundler\Task\BundleShowPathsTask|\Robo\Collection\CollectionBuilder
      */
     protected function taskBundleShowPaths(array $options = []): CollectionBuilder
     {

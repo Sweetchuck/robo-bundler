@@ -1,6 +1,6 @@
 <?php
 
-namespace Cheppers\Robo\Bundler\Task;
+namespace Sweetchuck\Robo\Bundler\Task;
 
 class BundleShowPathsTask extends BaseTask
 {

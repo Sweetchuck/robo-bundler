@@ -1,5 +1,5 @@
 {
-    "name": "cheppers/robo-bundler",
+    "name": "sweetchuck/robo-bundler",
     "description": "Robo task wrapper for Bundler.",
     "license": "GPL-2.0",
     "config": {
@@ -10,13 +10,13 @@
     "prefer-stable": true,
     "require": {
         "php": ">=7.1",
-        "cheppers/asset-jar": "^0.0",
+        "sweetchuck/asset-jar": "^0.0",
         "consolidation/robo": "^1.0"
     },
     "require-dev": {
-        "cheppers/git-hooks": "^0.0",
-        "cheppers/robo-git": "^0.0",
-        "cheppers/robo-phpcs": "^0.0",
+        "sweetchuck/git-hooks": "^0.0",
+        "sweetchuck/robo-git": "^0.0",
+        "sweetchuck/robo-phpcs": "^0.0",
         "codeception/codeception": "^2.2",
         "danielstjules/stringy": "^3.0",
         "symfony/finder": "^3.2",
@@ -24,22 +24,21 @@
     },
     "autoload": {
         "psr-4": {
-            "Cheppers\\Robo\\Bundler\\": "src/"
+            "Sweetchuck\\Robo\\Bundler\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Cheppers\\Robo\\Bundler\\Test\\Helper\\": "tests/_support/Helper/",
-            "Cheppers\\Robo\\Bundler\\Tests\\Acceptance\\": "tests/acceptance/",
-            "Cheppers\\Robo\\Bundler\\Tests\\Unit\\": "tests/unit/"
+            "Sweetchuck\\Robo\\Bundler\\Composer\\": "src-dev/Composer/",
+            "Sweetchuck\\Robo\\Bundler\\Test\\Helper\\": "tests/_support/Helper/",
+            "Sweetchuck\\Robo\\Bundler\\Tests\\Acceptance\\": "tests/acceptance/",
+            "Sweetchuck\\Robo\\Bundler\\Tests\\Unit\\": "tests/unit/"
         }
     },
     "scripts": {
-        "post-install-cmd": [
-            "\\Cheppers\\Robo\\Bundler\\Composer\\Scripts::postInstallCmd"
-        ],
-        "post-update-cmd": [
-            "\\Cheppers\\Robo\\Bundler\\Composer\\Scripts::postUpdateCmd"
-        ]
+        "post-install-cmd": "\\Sweetchuck\\Robo\\Bundler\\Composer\\Scripts::postInstallCmd",
+        "post-update-cmd": "\\Sweetchuck\\Robo\\Bundler\\Composer\\Scripts::postUpdateCmd",
+        "deploy-git-hooks": "\\Sweetchuck\\GitHooks\\Composer\\Scripts::deploy",
+        "bundle-check-install": "\\Sweetchuck\\Robo\\Bundler\\Composer\\Scripts::bundleCheckAndInstall"
     }
 }

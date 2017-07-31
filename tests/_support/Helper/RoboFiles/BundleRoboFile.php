@@ -1,9 +1,9 @@
 <?php
 
-namespace Cheppers\Robo\Bundler\Test\Helper\RoboFiles;
+namespace Sweetchuck\Robo\Bundler\Test\Helper\RoboFiles;
 
-use Cheppers\Robo\Bundler\BundlerTaskLoader;
-use Cheppers\Robo\Bundler\Test\Helper\Dummy\Command as DummyCommand;
+use Sweetchuck\Robo\Bundler\BundlerTaskLoader;
+use Sweetchuck\Robo\Bundler\Test\Helper\Dummy\Command as DummyCommand;
 use Robo\Contract\TaskInterface;
 use Robo\Tasks;
 use Webmozart\PathUtil\Path;

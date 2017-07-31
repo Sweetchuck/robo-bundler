@@ -1,14 +1,14 @@
 <?php
 
-namespace Cheppers\Robo\Bundler\Tests\Unit\Task;
+namespace Sweetchuck\Robo\Bundler\Tests\Unit\Task;
 
-use Cheppers\Robo\Bundler\Task\BundleInstallTask;
+use Sweetchuck\Robo\Bundler\Task\BundleInstallTask;
 use Codeception\Test\Unit;
 
 class BundleInstallTaskTest extends Unit
 {
     /**
-     * @var \Cheppers\Robo\Bundler\Test\UnitTester
+     * @var \Sweetchuck\Robo\Bundler\Test\UnitTester
      */
     protected $tester;
 

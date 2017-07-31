@@ -1,11 +1,11 @@
 <?php
 
-namespace Cheppers\Robo\Bundler\Tests\Unit\Task;
+namespace Sweetchuck\Robo\Bundler\Tests\Unit\Task;
 
-use Cheppers\AssetJar\AssetJar;
-use Cheppers\Robo\Bundler\Task\BundleShowPathsTask;
-use Cheppers\Robo\Bundler\Test\Helper\Dummy\Output as DummyOutput;
-use Cheppers\Robo\Bundler\Test\Helper\Dummy\Process as DummyProcess;
+use Sweetchuck\AssetJar\AssetJar;
+use Sweetchuck\Robo\Bundler\Task\BundleShowPathsTask;
+use Sweetchuck\Robo\Bundler\Test\Helper\Dummy\Output as DummyOutput;
+use Sweetchuck\Robo\Bundler\Test\Helper\Dummy\Process as DummyProcess;
 use Codeception\Test\Unit;
 use Codeception\Util\Stub;
 use Robo\Robo;
@@ -13,7 +13,7 @@ use Robo\Robo;
 class BundleShowPathsTaskTest extends Unit
 {
     /**
-     * @var \Cheppers\Robo\Bundler\Test\UnitTester
+     * @var \Sweetchuck\Robo\Bundler\Test\UnitTester
      */
     protected $tester;
 
@@ -125,7 +125,7 @@ class BundleShowPathsTaskTest extends Unit
             'assetJarMapping' => ['paths' => ['bundleShowPaths', 'paths']],
         ];
 
-        /** @var \Cheppers\Robo\Bundler\Task\BundleShowPathsTask $task */
+        /** @var \Sweetchuck\Robo\Bundler\Task\BundleShowPathsTask $task */
         $task = Stub::construct(
             BundleShowPathsTask::class,
             [$options],

@@ -1,8 +1,8 @@
 <?php
 
-namespace Cheppers\Robo\Bundler\Task;
+namespace Sweetchuck\Robo\Bundler\Task;
 
-use Cheppers\Robo\Bundler\Option\PathOption;
+use Sweetchuck\Robo\Bundler\Option\PathOption;
 
 class BundleCheckTask extends BaseTask
 {

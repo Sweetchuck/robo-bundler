@@ -3,5 +3,5 @@ class_name: AcceptanceTester
 modules:
     enabled:
         - Asserts
-        - \Cheppers\Robo\Bundler\Test\Helper\Acceptance
-        - \Cheppers\Robo\Bundler\Test\Helper\Module\RoboTaskRunner
+        - \Sweetchuck\Robo\Bundler\Test\Helper\Acceptance
+        - \Sweetchuck\Robo\Bundler\Test\Helper\Module\RoboTaskRunner
