@@ -2,6 +2,8 @@
 
 namespace Sweetchuck\Robo\Bundler\Test;
 
+use Codeception\Actor;
+
 /**
  * Inherited Methods
  * @method void wantToTest($text)
@@ -17,7 +19,7 @@ namespace Sweetchuck\Robo\Bundler\Test;
  *
  * @SuppressWarnings(PHPMD)
 */
-class UnitTester extends \Codeception\Actor
+class UnitTester extends Actor
 {
     use _generated\UnitTesterActions;
 }

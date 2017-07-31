@@ -2,8 +2,6 @@
 
 namespace Sweetchuck\Robo\Bundler\Task;
 
-use Sweetchuck\AssetJar\AssetJarAware;
-use Sweetchuck\AssetJar\AssetJarAwareInterface;
 use Sweetchuck\Robo\Bundler\Utils;
 use Robo\Common\OutputAwareTrait;
 use Robo\Contract\CommandInterface;
@@ -13,9 +11,8 @@ use Robo\Task\BaseTask as RoboBaseTask;
 use Robo\TaskInfo;
 use Symfony\Component\Process\Process;
 
-abstract class BaseTask extends RoboBaseTask implements AssetJarAwareInterface, CommandInterface, OutputAwareInterface
+abstract class BaseTask extends RoboBaseTask implements CommandInterface, OutputAwareInterface
 {
-    use AssetJarAware;
     use OutputAwareTrait;
 
     /**
@@ -59,6 +56,28 @@ abstract class BaseTask extends RoboBaseTask implements AssetJarAwareInterface, 
     protected $assets = [];
 
     //region Options.
+
+    // region Option - assetNamePrefix.
+    /**
+     * @var string
+     */
+    protected $assetNamePrefix = '';
+
+    public function getAssetNamePrefix(): string
+    {
+        return $this->assetNamePrefix;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setAssetNamePrefix(string $value)
+    {
+        $this->assetNamePrefix = $value;
+
+        return $this;
+    }
+    // endregion
 
     //region Option - workingDirectory.
     /**
@@ -212,14 +231,9 @@ abstract class BaseTask extends RoboBaseTask implements AssetJarAwareInterface, 
     public function setOptions(array $option)
     {
         foreach ($option as $name => $value) {
-            // @codingStandardsIgnoreStart
             switch ($name) {
-                case 'assetJar':
-                    $this->setAssetJar($value);
-                    break;
-
-                case 'assetJarMapping':
-                    $this->setAssetJarMapping($value);
+                case 'assetNamePrefix':
+                    $this->setAssetNamePrefix($value);
                     break;
 
                 case 'workingDirectory':
@@ -246,7 +260,6 @@ abstract class BaseTask extends RoboBaseTask implements AssetJarAwareInterface, 
                     $this->setNoColor($value);
                     break;
             }
-            // @codingStandardsIgnoreEnd
         }
 
         return $this;
@@ -370,7 +383,6 @@ abstract class BaseTask extends RoboBaseTask implements AssetJarAwareInterface, 
             ->runHeader()
             ->runAction()
             ->runProcessOutputs()
-            ->runReleaseAssets()
             ->runReturn();
     }
 
@@ -409,31 +421,13 @@ abstract class BaseTask extends RoboBaseTask implements AssetJarAwareInterface, 
         return $this;
     }
 
-    /**
-     * @return $this
-     */
-    protected function runReleaseAssets()
-    {
-        if ($this->hasAssetJar()) {
-            $assetJar = $this->getAssetJar();
-            foreach ($this->assets as $name => $value) {
-                $mapping = $this->getAssetJarMap($name);
-                if ($mapping) {
-                    $assetJar->setValue($mapping, $value);
-                }
-            }
-        }
-
-        return $this;
-    }
-
     protected function runReturn(): Result
     {
         return new Result(
             $this,
             $this->actionExitCode,
             $this->actionStdError,
-            $this->assets
+            $this->getAssetsWithPrefixedNames()
         );
     }
 
@@ -470,6 +464,21 @@ abstract class BaseTask extends RoboBaseTask implements AssetJarAwareInterface, 
                 'value' => $this->getNoColor(),
             ],
         ];
+    }
+
+    protected function getAssetsWithPrefixedNames(): array
+    {
+        $prefix = $this->getAssetNamePrefix();
+        if (!$prefix) {
+            return $this->assets;
+        }
+
+        $data = [];
+        foreach ($this->assets as $key => $value) {
+            $data["{$prefix}{$key}"] = $value;
+        }
+
+        return $data;
     }
 
     /**

@@ -56,6 +56,6 @@ class BundleRoboFile extends Tasks
 
     protected function dataDir(string $suffix = ''): string
     {
-        return Path::canonicalize(Path::join(__DIR__, '../../../_data/', $suffix));
+        return Path::join(__DIR__, '../../../_data/', $suffix);
     }
 }
