@@ -3,7 +3,7 @@
 namespace Sweetchuck\Robo\Bundler\Tests\Unit\Task;
 
 use Sweetchuck\Robo\Bundler\Task\BundleExecTask;
-use Sweetchuck\Robo\Bundler\Test\Helper\Dummy\Command as DummyCommand;
+use Sweetchuck\Robo\Bundler\Test\Helper\Dummy\DummyCommand;
 use Codeception\Test\Unit;
 
 class BundleExecTaskTest extends Unit

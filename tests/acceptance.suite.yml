@@ -4,4 +4,4 @@ modules:
     enabled:
         - Asserts
         - \Sweetchuck\Robo\Bundler\Test\Helper\Acceptance
-        - \Sweetchuck\Robo\Bundler\Test\Helper\Module\RoboTaskRunner
+        - \Sweetchuck\Codeception\Module\RoboTaskRunner\RoboTaskRunner

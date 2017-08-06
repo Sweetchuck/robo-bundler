@@ -4,7 +4,7 @@ namespace Sweetchuck\Robo\Bundler\Test\Helper\Dummy;
 
 use Robo\Contract\CommandInterface;
 
-class Command implements CommandInterface
+class DummyCommand implements CommandInterface
 {
     /**
      * @var string

@@ -3,11 +3,12 @@
 namespace Sweetchuck\Robo\Bundler\Tests\Unit\Task;
 
 use Sweetchuck\Robo\Bundler\Task\BundleShowPathsTask;
-use Sweetchuck\Robo\Bundler\Test\Helper\Dummy\Output as DummyOutput;
-use Sweetchuck\Robo\Bundler\Test\Helper\Dummy\Process as DummyProcess;
+use Sweetchuck\Codeception\Module\RoboTaskRunner\DummyOutput;
+use Sweetchuck\Robo\Bundler\Test\Helper\Dummy\DummyProcess;
 use Codeception\Test\Unit;
 use Codeception\Util\Stub;
 use Robo\Robo;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class BundleShowPathsTaskTest extends Unit
 {
@@ -116,7 +117,11 @@ class BundleShowPathsTaskTest extends Unit
         $container = Robo::createDefaultContainer();
         Robo::setContainer($container);
 
-        $mainStdOutput = new DummyOutput([]);
+        $outputConfig = [
+            'verbosity' => OutputInterface::VERBOSITY_DEBUG,
+            'colors' => false,
+        ];
+        $mainStdOutput = new DummyOutput($outputConfig);
 
         /** @var \Sweetchuck\Robo\Bundler\Task\BundleShowPathsTask $task */
         $task = Stub::construct(
