@@ -2,7 +2,9 @@
 
 namespace Sweetchuck\Robo\Bundler\Test\Helper;
 
-class Acceptance extends \Codeception\Module
+use Codeception\Module;
+
+class Acceptance extends Module
 {
 
 }

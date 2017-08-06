@@ -2,7 +2,6 @@
 
 namespace Sweetchuck\Robo\Bundler\Tests\Unit\Task;
 
-use Sweetchuck\AssetJar\AssetJar;
 use Sweetchuck\Robo\Bundler\Task\BundleShowPathsTask;
 use Sweetchuck\Robo\Bundler\Test\Helper\Dummy\Output as DummyOutput;
 use Sweetchuck\Robo\Bundler\Test\Helper\Dummy\Process as DummyProcess;
@@ -119,12 +118,6 @@ class BundleShowPathsTaskTest extends Unit
 
         $mainStdOutput = new DummyOutput([]);
 
-        $assetJar = new AssetJar();
-        $options += [
-            'assetJar' => $assetJar,
-            'assetJarMapping' => ['paths' => ['bundleShowPaths', 'paths']],
-        ];
-
         /** @var \Sweetchuck\Robo\Bundler\Task\BundleShowPathsTask $task */
         $task = Stub::construct(
             BundleShowPathsTask::class,
@@ -146,12 +139,6 @@ class BundleShowPathsTaskTest extends Unit
             $expected['exitCode'],
             $result->getExitCode(),
             'Exit code is different than the expected.'
-        );
-
-        $this->tester->assertEquals(
-            $expected['paths'],
-            $task->getAssetJarValue('paths'),
-            'AssetJar content: paths'
         );
 
         $this->tester->assertEquals(

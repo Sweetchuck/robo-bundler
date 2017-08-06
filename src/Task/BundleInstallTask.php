@@ -426,7 +426,6 @@ class BundleInstallTask extends BaseTask
     {
         parent::setOptions($option);
         foreach ($option as $name => $value) {
-            // @codingStandardsIgnoreStart
             switch ($name) {
                 case 'binStubs':
                     $this->setBinStubs($value);
@@ -500,7 +499,6 @@ class BundleInstallTask extends BaseTask
                     $this->setWithOrWithout($value);
                     break;
             }
-            // @codingStandardsIgnoreEnd
         }
 
         return $this;
