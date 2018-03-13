@@ -237,7 +237,8 @@ class BundleInstallTaskTest extends Unit
      */
     public function testGetCommand(string $expected, array $options): void
     {
-        $task = new BundleInstallTask($options);
+        $task = new BundleInstallTask();
+        $task->setOptions($options);
         $this->tester->assertEquals($expected, $task->getCommand());
     }
 }

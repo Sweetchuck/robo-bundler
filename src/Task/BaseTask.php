@@ -218,14 +218,6 @@ abstract class BaseTask extends RoboBaseTask implements CommandInterface, Output
     //endregion
 
     /**
-     * {@inheritdoc}
-     */
-    public function __construct(array $options = [])
-    {
-        $this->setOptions($options);
-    }
-
-    /**
      * @return $this
      */
     public function setOptions(array $option)
