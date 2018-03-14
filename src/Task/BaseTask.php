@@ -149,6 +149,28 @@ abstract class BaseTask extends RoboBaseTask implements CommandInterface, Output
     }
     //endregion
 
+    // region rubyExecutable
+    /**
+     * @var string
+     */
+    protected $rubyExecutable = '';
+
+    public function getRubyExecutable(): string
+    {
+        return $this->rubyExecutable;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setRubyExecutable(string $value)
+    {
+        $this->rubyExecutable = $value;
+
+        return $this;
+    }
+    // endregion
+
     //region Option - bundleExecutable.
     /**
      * @var string
@@ -240,6 +262,10 @@ abstract class BaseTask extends RoboBaseTask implements CommandInterface, Output
                     $this->setGemFile($value);
                     break;
 
+                case 'rubyExecutable':
+                    $this->setRubyExecutable($value);
+                    break;
+
                 case 'bundleExecutable':
                     $this->setBundleExecutable($value);
                     break;
@@ -274,6 +300,11 @@ abstract class BaseTask extends RoboBaseTask implements CommandInterface, Output
         $cmdArgs = [];
 
         $cmdAsIs = [];
+
+        if ($this->getRubyExecutable()) {
+            $cmdPattern[] = '%s';
+            $cmdArgs[] = escapeshellcmd($this->getRubyExecutable());
+        }
 
         $cmdPattern[] = '%s';
         $cmdArgs[] = escapeshellcmd($this->getBundleExecutable());

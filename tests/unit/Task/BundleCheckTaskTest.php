@@ -38,6 +38,14 @@ class BundleCheckTaskTest extends Unit
                     'gemFile' => 'myGemfile',
                 ],
             ],
+            'Gemfile & rubyExecutable & bundleExecutable' => [
+                "BUNDLE_GEMFILE='../myGemfile' my-ruby my-bundle check",
+                [
+                    'bundleGemFile' => '../myGemfile',
+                    'rubyExecutable' => 'my-ruby',
+                    'bundleExecutable' => 'my-bundle',
+                ],
+            ],
             'bundleExecutable' => [
                 'my-bundle check',
                 [

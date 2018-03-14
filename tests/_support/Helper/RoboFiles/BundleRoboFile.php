@@ -5,7 +5,9 @@ namespace Sweetchuck\Robo\Bundler\Test\Helper\RoboFiles;
 use Sweetchuck\Robo\Bundler\BundlerTaskLoader;
 use Sweetchuck\Robo\Bundler\Test\Helper\Dummy\DummyCommand as DummyCommand;
 use Robo\Contract\TaskInterface;
+use Robo\State\Data as RoboStateData;
 use Robo\Tasks;
+use Symfony\Component\Yaml\Yaml;
 use Webmozart\PathUtil\Path;
 
 class BundleRoboFile extends Tasks
@@ -52,6 +54,35 @@ class BundleRoboFile extends Tasks
             ->taskBundleShowPaths()
             ->setOutput($this->output())
             ->setBundleGemFile($this->dataDir('Gemfile.success.rb'));
+    }
+
+    /**
+     * @command bundle:platform:ruby-version
+     */
+    public function bundlePlatformRubyVersion()
+    {
+        return $this
+            ->collectionBuilder()
+            ->addTask(
+                $this
+                    ->taskBundlePlatformRubyVersion()
+                    ->setAssetNamePrefix('bundlePlatformRubyVersion.')
+                    ->setBundleGemFile($this->dataDir('Gemfile.success.rb'))
+            )
+            ->addCode(function (RoboStateData $data) {
+                $versionParts = [
+                    'full' => $data['bundlePlatformRubyVersion.full'],
+                    'base' => $data['bundlePlatformRubyVersion.base'],
+                    'major' => $data['bundlePlatformRubyVersion.major'],
+                    'minor' => $data['bundlePlatformRubyVersion.minor'],
+                    'fix' => $data['bundlePlatformRubyVersion.fix'],
+                    'patch' => $data['bundlePlatformRubyVersion.patch'],
+                ];
+
+                $this->output()->write(Yaml::dump($versionParts));
+
+                return 0;
+            });
     }
 
     protected function dataDir(string $suffix = ''): string
