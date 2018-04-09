@@ -27,7 +27,7 @@ class Utils
             $versionParts['major'] = (int) $matches['major'];
             $versionParts['minor'] = (int) $matches['minor'];
             $versionParts['fix'] = (int) $matches['fix'];
-            $versionParts['patch'] = $matches['patch'] ? (int) $matches['patch'] : null;
+            $versionParts['patch'] = isset($matches['patch']) ? (int) $matches['patch'] : null;
             $versionParts['base'] = "{$versionParts['major']}.{$versionParts['minor']}.{$versionParts['fix']}";
         }
 

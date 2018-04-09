@@ -177,7 +177,7 @@ abstract class BaseTask extends RoboBaseTask implements CommandInterface, Output
      */
     protected $bundleExecutable = 'bundle';
 
-    protected function getBundleExecutable(): string
+    public function getBundleExecutable(): string
     {
         return $this->bundleExecutable;
     }
@@ -185,7 +185,7 @@ abstract class BaseTask extends RoboBaseTask implements CommandInterface, Output
     /**
      * @return $this
      */
-    protected function setBundleExecutable(string $value)
+    public function setBundleExecutable(string $value)
     {
         $this->bundleExecutable = $value;
 
