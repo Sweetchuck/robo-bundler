@@ -18,12 +18,13 @@ class BundlePlatformRubyVersionCest
         $I->assertEquals(0, $exitCode);
         $I->assertEquals(
             implode(PHP_EOL, [
-                'full: 2.3.1p112',
+                'original: 2.3.1p112',
+                'full: 2.3.1+p112',
                 'base: 2.3.1',
                 'major: 2',
                 'minor: 3',
-                'fix: 1',
-                'patch: 112',
+                'patch: 1',
+                'buildMetaData: p112',
                 '',
             ]),
             $stdOutput

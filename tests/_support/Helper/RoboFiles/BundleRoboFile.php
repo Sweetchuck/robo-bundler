@@ -71,12 +71,13 @@ class BundleRoboFile extends Tasks
             )
             ->addCode(function (RoboStateData $data) {
                 $versionParts = [
+                    'original' => $data['bundlePlatformRubyVersion.original'],
                     'full' => $data['bundlePlatformRubyVersion.full'],
                     'base' => $data['bundlePlatformRubyVersion.base'],
                     'major' => $data['bundlePlatformRubyVersion.major'],
                     'minor' => $data['bundlePlatformRubyVersion.minor'],
-                    'fix' => $data['bundlePlatformRubyVersion.fix'],
                     'patch' => $data['bundlePlatformRubyVersion.patch'],
+                    'buildMetaData' => $data['bundlePlatformRubyVersion.buildMetaData'],
                 ];
 
                 $this->output()->write(Yaml::dump($versionParts));

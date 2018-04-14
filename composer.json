@@ -10,7 +10,8 @@
     "prefer-stable": true,
     "require": {
         "php": ">=7.1",
-        "consolidation/robo": "^1.0"
+        "consolidation/robo": "^1.0",
+        "icecave/semver": "^3.0"
     },
     "require-dev": {
         "codeception/codeception": "^2.2",
