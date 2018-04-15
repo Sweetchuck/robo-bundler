@@ -11,7 +11,7 @@ class BundleCheckTask extends BaseTask
     /**
      * {@inheritdoc}
      */
-    protected $taskName = 'BundleCheck';
+    protected $taskName = 'Bundler - Check';
 
     /**
      * {@inheritdoc}

@@ -76,7 +76,8 @@ class BundleShowPathsTaskTest extends Unit
      */
     public function testGetCommand(string $expected, array $options): void
     {
-        $task = new BundleShowPathsTask($options);
+        $task = new BundleShowPathsTask();
+        $task->setOptions($options);
         $this->tester->assertEquals($expected, $task->getCommand());
     }
 
@@ -126,11 +127,12 @@ class BundleShowPathsTaskTest extends Unit
         /** @var \Sweetchuck\Robo\Bundler\Task\BundleShowPathsTask $task */
         $task = Stub::construct(
             BundleShowPathsTask::class,
-            [$options],
+            [],
             [
                 'processClass' => DummyProcess::class,
             ]
         );
+        $task->setOptions($options);
 
         $processIndex = count(DummyProcess::$instances);
         DummyProcess::$prophecy[$processIndex] = $processProphecy;

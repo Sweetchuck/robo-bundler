@@ -149,13 +149,35 @@ abstract class BaseTask extends RoboBaseTask implements CommandInterface, Output
     }
     //endregion
 
+    // region rubyExecutable
+    /**
+     * @var string
+     */
+    protected $rubyExecutable = '';
+
+    public function getRubyExecutable(): string
+    {
+        return $this->rubyExecutable;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setRubyExecutable(string $value)
+    {
+        $this->rubyExecutable = $value;
+
+        return $this;
+    }
+    // endregion
+
     //region Option - bundleExecutable.
     /**
      * @var string
      */
     protected $bundleExecutable = 'bundle';
 
-    protected function getBundleExecutable(): string
+    public function getBundleExecutable(): string
     {
         return $this->bundleExecutable;
     }
@@ -163,7 +185,7 @@ abstract class BaseTask extends RoboBaseTask implements CommandInterface, Output
     /**
      * @return $this
      */
-    protected function setBundleExecutable(string $value)
+    public function setBundleExecutable(string $value)
     {
         $this->bundleExecutable = $value;
 
@@ -218,14 +240,6 @@ abstract class BaseTask extends RoboBaseTask implements CommandInterface, Output
     //endregion
 
     /**
-     * {@inheritdoc}
-     */
-    public function __construct(array $options = [])
-    {
-        $this->setOptions($options);
-    }
-
-    /**
      * @return $this
      */
     public function setOptions(array $option)
@@ -246,6 +260,10 @@ abstract class BaseTask extends RoboBaseTask implements CommandInterface, Output
 
                 case 'gemFile':
                     $this->setGemFile($value);
+                    break;
+
+                case 'rubyExecutable':
+                    $this->setRubyExecutable($value);
                     break;
 
                 case 'bundleExecutable':
@@ -282,6 +300,11 @@ abstract class BaseTask extends RoboBaseTask implements CommandInterface, Output
         $cmdArgs = [];
 
         $cmdAsIs = [];
+
+        if ($this->getRubyExecutable()) {
+            $cmdPattern[] = '%s';
+            $cmdArgs[] = escapeshellcmd($this->getRubyExecutable());
+        }
 
         $cmdPattern[] = '%s';
         $cmdArgs[] = escapeshellcmd($this->getBundleExecutable());

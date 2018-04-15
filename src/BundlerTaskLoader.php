@@ -11,7 +11,11 @@ trait BundlerTaskLoader
      */
     protected function taskBundleCheck(array $options = []): CollectionBuilder
     {
-        return $this->task(Task\BundleCheckTask::class, $options);
+        /** @var \Sweetchuck\Robo\Bundler\Task\BundleCheckTask $task */
+        $task = $this->task(Task\BundleCheckTask::class);
+        $task->setOptions($options);
+
+        return $task;
     }
 
     /**
@@ -19,7 +23,11 @@ trait BundlerTaskLoader
      */
     protected function taskBundleExec(array $options = []): CollectionBuilder
     {
-        return $this->task(Task\BundleExecTask::class, $options);
+        /** @var \Sweetchuck\Robo\Bundler\Task\BundleExecTask $task */
+        $task = $this->task(Task\BundleExecTask::class);
+        $task->setOptions($options);
+
+        return $task;
     }
 
     /**
@@ -27,7 +35,23 @@ trait BundlerTaskLoader
      */
     protected function taskBundleInstall(array $options = []): CollectionBuilder
     {
-        return $this->task(Task\BundleInstallTask::class, $options);
+        /** @var \Sweetchuck\Robo\Bundler\Task\BundleInstallTask $task */
+        $task = $this->task(Task\BundleInstallTask::class);
+        $task->setOptions($options);
+
+        return $task;
+    }
+
+    /**
+     * @return \Sweetchuck\Robo\Bundler\Task\BundlePlatformRubyVersionTask|\Robo\Collection\CollectionBuilder
+     */
+    protected function taskBundlePlatformRubyVersion(array $options = []): CollectionBuilder
+    {
+        /** @var \Sweetchuck\Robo\Bundler\Task\BundlePlatformRubyVersionTask $task */
+        $task = $this->task(Task\BundlePlatformRubyVersionTask::class);
+        $task->setOptions($options);
+
+        return $task;
     }
 
     /**
@@ -35,6 +59,10 @@ trait BundlerTaskLoader
      */
     protected function taskBundleShowPaths(array $options = []): CollectionBuilder
     {
-        return $this->task(Task\BundleShowPathsTask::class, $options);
+        /** @var \Sweetchuck\Robo\Bundler\Task\BundleShowPathsTask $task */
+        $task = $this->task(Task\BundleShowPathsTask::class);
+        $task->setOptions($options);
+
+        return $task;
     }
 }

@@ -59,7 +59,8 @@ class BundleExecTaskTest extends Unit
      */
     public function testGetCommand(string $expected, array $options): void
     {
-        $task = new BundleExecTask($options);
+        $task = new BundleExecTask();
+        $task->setOptions($options);
         $this->tester->assertEquals($expected, $task->getCommand());
     }
 }
