@@ -7,7 +7,7 @@ class BundleExecTask extends BaseTask
     /**
      * {@inheritdoc}
      */
-    protected $taskName = 'BundleExec';
+    protected $taskName = 'Bundler - Exec';
 
     /**
      * {@inheritdoc}

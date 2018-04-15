@@ -11,7 +11,7 @@ class BundleInstallTask extends BaseTask
     /**
      * {@inheritdoc}
      */
-    protected $taskName = 'BundleInstall';
+    protected $taskName = 'Bundler - Install';
 
     /**
      * {@inheritdoc}
